@@ -5,6 +5,7 @@ import BrandSearch from '../brandSearch/BrandSearch';
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import ProductDetails from '../productDetails/ProductDetails';
+import BrandFilter from '../brandFilter/BrandFilter';
 
 
 class Home extends Component {
@@ -52,6 +53,12 @@ class Home extends Component {
                             clicked = {this.productSeachHandler}
                             changed = {this.handleChangeValue}/>
                 </section>
+                {
+                    this.state.products.length>0?(
+                        <section className={styles.BrandInfo}>
+                            <BrandFilter/>
+                        </section>):""
+                }
                 <section className={styles.BrandInfo}>
                     {products}
                 </section>
