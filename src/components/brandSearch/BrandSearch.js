@@ -7,8 +7,11 @@ class BrandSearch extends Component{
         return (
             <div className={styles.BrandSearch}>
                 <label>Product Name : </label>
-                <input type="text" />
-                <button >Search</button>
+                <input 
+                    type="text" 
+                    value={this.props.inputText} 
+                    onChange={this.props.changed} />
+                <button onClick={this.props.clicked} >Search</button>
             </div>
         );
     }

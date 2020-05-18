@@ -10,77 +10,25 @@ import ProductDetails from '../productDetails/ProductDetails';
 class Home extends Component {
 
     state = {
-        products : [
-            {
-                id: 1,
-                brandName : "Bisleri",
-                category : "Water",
-                country : "India",
-                link : "https://amazon.in"
-            },
-            {
-                id: 2,
-                brandName : "Bisleri",
-                category : "Water",
-                country : "India",
-                link : "https://amazon.in"
-            },
-            {
-                id: 3,
-                brandName : "Bisleri",
-                category : "Water",
-                country : "India",
-                link : "https://amazon.in"
-            },
-            {
-                id: 4,
-                brandName : "Bisleri",
-                category : "Water",
-                country : "India",
-                link : "https://amazon.in"
-            },
-            {
-                id: 5,
-                brandName : "Bisleri",
-                category : "Water",
-                country : "India",
-                link : "https://amazon.in"
-            },
-            {
-                id: 6,
-                brandName : "Bisleri",
-                category : "Water",
-                country : "India",
-                link : "https://amazon.in"
-            },
-            {
-                id: 7,
-                brandName : "Bisleri",
-                category : "Water",
-                country : "India",
-                link : "https://amazon.in"
-            },
-            {
-                id: 8,
-                brandName : "Bisleri",
-                category : "Water",
-                country : "India",
-                link : "https://amazon.in"
-            }
-
-        ],
+        inputText : "",
+        products : [],
         error : false
     }
-    /*componentDidMount(){
-        axios.get("/posts")
+    productSeachHandler = () => {
+        const val = this.state.inputText;
+        axios.get("/search?inputText=" + val)
                 .then( response => {
-                    this.setState({products : response.data});
+                    this.setState({products : response.data.response});
                 })
                 .catch( err => {
                     console.log(err);
                     this.setState({error: true})
                 });
-    }*/
+    }
+    handleChangeValue = (e) => {
+        this.setState({inputText: e.target.value});
+    }
+
     render () {
         let products = <p>Something went wrong!</p>;
         if(!this.state.error){
@@ -99,7 +47,10 @@ class Home extends Component {
                     <Header/>
                 </section>
                 <section>
-                    <BrandSearch/>
+                    <BrandSearch 
+                            inputText={this.state.inputText} 
+                            clicked = {this.productSeachHandler}
+                            changed = {this.handleChangeValue}/>
                 </section>
                 <section className={styles.BrandInfo}>
                     {products}
