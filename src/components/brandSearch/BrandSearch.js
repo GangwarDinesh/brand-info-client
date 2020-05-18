@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from 'brandSearch.module.css';
 
 
 class BrandSearch extends Component{
