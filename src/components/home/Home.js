@@ -12,13 +12,15 @@ class Home extends Component {
 
     state = {
         inputText : "",
-        products : [],
+        products : null,
+        filteredProducts : [],
         error : false
     }
     productSeachHandler = () => {
         const val = this.state.inputText;
         axios.get("/search?inputText=" + val)
                 .then( response => {
+                    this.setState({filteredProducts : response.data.response});
                     this.setState({products : response.data.response});
                 })
                 .catch( err => {
@@ -30,16 +32,32 @@ class Home extends Component {
         this.setState({inputText: e.target.value});
     }
 
+    filterHandler = (e) => {
+        const val = e.target.value;
+        if(val === "All"){
+            this.setState({filteredProducts: this.state.products});
+        }else{
+            const updatedProducts = this.state.products.filter(p => {return p.country === val});
+            this.setState({filteredProducts: updatedProducts});
+        }
+    }
+
     render () {
         let products = <p>Something went wrong!</p>;
+        let countries = new Set();
+        let options = "";
         if(!this.state.error){
-            products = this.state.products.map(product => {
+            products = this.state.filteredProducts.map(product => {
+                countries.add(product.country);
                 return <ProductDetails 
                             key={product.id} 
                             brandName={product.brandName} 
                             category={product.category}
                             country={product.country} 
                             link={product.link} />
+            });
+            options = Array.from(countries).map(key => {
+                return <option value={key}>{key}</option>;
             });
         }
         return (
@@ -54,9 +72,11 @@ class Home extends Component {
                             changed = {this.handleChangeValue}/>
                 </section>
                 {
-                    this.state.products.length>0?(
+                    this.state.products?(
                         <section className={styles.BrandInfo}>
-                            <BrandFilter/>
+                            <BrandFilter 
+                                changed={this.filterHandler}
+                                options = {options} />
                         </section>):""
                 }
                 <section className={styles.BrandInfo}>

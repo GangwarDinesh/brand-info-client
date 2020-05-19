@@ -8,11 +8,12 @@ const brandFilter = ( props ) => {
                     <div className={styles.Column}>
                         <h3>Brand Details</h3>
                     </div>
+
                     <div className={styles.Column}>
                         <p style={{display: "inline-block", paddingRight: "10px"}}>Filter By country : </p> 
-                        <select className={styles.Select} >
-                            <option>India</option>
-                            <option>USA</option>
+                        <select defaultValue={'All'} className={styles.Select} onChange={props.changed} >
+                            <option value="All">All</option>
+                            {props.options}
                         </select>
                         
                     </div>

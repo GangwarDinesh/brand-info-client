@@ -6,7 +6,7 @@ class BrandSearch extends Component{
     render() {
         return (
             <div className={styles.BrandSearch}>
-                <label>Product Name : </label>
+                <label>Enter Product Name </label>
                 <input 
                     type="text" 
                     value={this.props.inputText} 
