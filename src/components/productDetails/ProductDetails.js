@@ -15,10 +15,18 @@ const productDetails = (props) => (
                 </p>
                 <p> 
                     <span style={{fontWeight: 'bold'}}>Product based on : </span>
-                    <span>{props.country}</span>
+                    <span>{
+                            props.country === "India" ? 
+                            <blink style={{color : "green", fontWeight: "bold"}}>{props.country}</blink> : 
+                            props.country
+                        }</span>
                 </p>
                 <p>
-                    <a href={props.link}>You can click here to buy</a>
+                    {
+                        props.country === "India" ? 
+                                <a href={props.link}>Click here to Buy</a> : "" 
+                    }
+                    
                 </p>
             </div>
         </div>

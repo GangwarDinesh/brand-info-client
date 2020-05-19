@@ -12,20 +12,35 @@ class Home extends Component {
 
     state = {
         inputText : "",
-        products : null,
+        products : [],
         filteredProducts : [],
-        error : false
+        error : false,
+        countries : [],
+        defaultMessage : "Blank"
     }
     productSeachHandler = () => {
         const val = this.state.inputText;
         axios.get("/search?inputText=" + val)
                 .then( response => {
-                    this.setState({filteredProducts : response.data.response});
-                    this.setState({products : response.data.response});
+                    let countriesSet = new Set();
+                    response.data.response.map(obj=>{
+                        countriesSet.add(obj.country);
+                    });
+                    this.setState({
+                        filteredProducts : response.data.response,
+                        products : response.data.response,
+                        countries : countriesSet
+                    });
+   
+                    if(response.data.response.length===0){
+                        this.setState({defaultMessage : "Brand infromation not found..."});
+                    }else{
+                        this.setState({defaultMessage : null});
+                    }
                 })
                 .catch( err => {
                     console.log(err);
-                    this.setState({error: true})
+                    this.setState({error: true, defaultMessage: "Something went wrong!"});
                 });
     }
     handleChangeValue = (e) => {
@@ -43,12 +58,10 @@ class Home extends Component {
     }
 
     render () {
-        let products = <p>Something went wrong!</p>;
-        let countries = new Set();
+        let products = "";
         let options = "";
         if(!this.state.error){
             products = this.state.filteredProducts.map(product => {
-                countries.add(product.country);
                 return <ProductDetails 
                             key={product.id} 
                             brandName={product.brandName} 
@@ -56,8 +69,8 @@ class Home extends Component {
                             country={product.country} 
                             link={product.link} />
             });
-            options = Array.from(countries).map(key => {
-                return <option value={key}>{key}</option>;
+            options = Array.from(this.state.countries).map(key => {
+                return <option key={key} value={key}>{key}</option>;
             });
         }
         return (
@@ -75,8 +88,9 @@ class Home extends Component {
                     this.state.products?(
                         <section className={styles.BrandInfo}>
                             <BrandFilter 
-                                changed={this.filterHandler}
-                                options = {options} />
+                                changed = {this.filterHandler}
+                                options = {options}
+                                message = {this.state.defaultMessage} />
                         </section>):""
                 }
                 <section className={styles.BrandInfo}>
