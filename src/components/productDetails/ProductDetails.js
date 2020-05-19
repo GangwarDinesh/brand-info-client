@@ -16,7 +16,7 @@ const productDetails = (props) => (
                 <p> 
                     <span style={{fontWeight: 'bold'}}>Product based on : </span>
                     <span>{
-                            props.country === "India" ? 
+                            props.country === "India" && props.country !== null ? 
                             <blink style={{color : "green", fontWeight: "bold"}}>{props.country}</blink> : 
                             props.country
                         }</span>
