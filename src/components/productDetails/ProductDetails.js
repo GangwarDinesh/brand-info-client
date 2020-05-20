@@ -18,7 +18,7 @@ const productDetails = (props) => (
                     <span>
                         {
                             props.country === "India" ? 
-                            <blink style={{color : "green", fontWeight: "bold"}}>{props.country}</blink> : 
+                            <span style={{color : "green", fontWeight: "bold"}}>{props.country}</span> : 
                             props.country
                         }</span>
                 </p>
