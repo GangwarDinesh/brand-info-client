@@ -4,7 +4,7 @@ import styles from './header.module.css';
 const header = (props) => {
     return (
         <div className={styles.Header}>
-                <h1>Header</h1>
+                <h3>Products Brand informer</h3>
         </div>
     );
 } 
