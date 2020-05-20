@@ -36,17 +36,11 @@
     color: #fa923f;
     cursor: pointer;
     border-radius: 5px 5px 5px 5px;
-    width: 10%;
+    width: auto;
 }
 
 .BrandSearch button:hover,
 .BrandSearch button:active {
     color: white;
     background-color: #fa923f;
-}
-
-@media (max-width : 500px ){
-    .BrandSearch button {
-        width: 20%;
-    }
 }

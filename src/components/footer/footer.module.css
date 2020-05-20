@@ -1,9 +1,12 @@
 .Footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
     width: 100%;
-    background-color: #f16334;
-    color: #fff;
+    margin: auto;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
     text-align: center;
+    -webkit-tap-highlight-color: transparent;
+    background: #f16334;
+    color: #fff;
+    bottom: 0;
+    top: 0;
 }

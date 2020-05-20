@@ -34,7 +34,7 @@
     width: 30%;
     max-width: 30%; /* useful when width is set to anything other than 100% */
     box-sizing: border-box;
-    margin: 0;
+    margin: 5px;
     border: 1px solid #aaa;
     box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
     border-radius: .5em;

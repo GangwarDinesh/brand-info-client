@@ -3,6 +3,7 @@ import styles from './brandSearch.module.css';
 
 
 class BrandSearch extends Component{
+
     render() {
         return (
             <div className={styles.BrandSearch}>

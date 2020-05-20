@@ -7,6 +7,7 @@ const brandFilter = ( props ) => {
     if("Blank" === props.message){
         content = "";
     }
+    
     else if(null === props.message){
         content = <div className={styles.BrandFilter}>
                     <div className={styles.Row}>            
