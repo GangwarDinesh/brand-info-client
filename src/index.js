@@ -5,7 +5,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import axios from 'axios';
 
-axios.defaults.baseURL = "http://localhost:8282/brand-info-service/api/v1/";
+axios.defaults.baseURL = "https://productservice-278010.uc.r.appspot.com/api/v1/";
 axios.defaults.headers.common["Authorization"] = "AUTH-TOKEN";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
