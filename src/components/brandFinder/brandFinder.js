@@ -24,6 +24,7 @@ class BrandFinder extends Component {
                     let countriesSet = new Set();
                     response.data.response.map(obj=>{
                         countriesSet.add(obj.country);
+                        return true;
                     });
                     this.setState({
                         filteredProducts : response.data.response,

@@ -3,8 +3,6 @@ import styles from './productDetails.module.css';
 
 const productDetails = (props) => (
     <article className={styles.ProductDetails}>
-        <h1></h1>
-        <h1></h1>
         <div className="Info">
             <div className={styles.ProductInfoSection}>
                 <p> 
