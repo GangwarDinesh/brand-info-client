@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import styles from './navigationItem.module.css';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 class NavigationItem extends Component{
 
     render() {    
         return (
             <li className={styles.NavigationItem}>
-                <Link 
+                <NavLink exact 
                     to={this.props.link} 
-                    className={this.props.active ? styles.active : null}>
+                    activeClassName={styles.active}>
                     {this.props.children}
-                </Link>
+                </NavLink>
             </li>
             );
     }

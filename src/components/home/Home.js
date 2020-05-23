@@ -10,7 +10,7 @@ import PojoConverter from '../pojoConverter/PojoConverter';
 class Home extends Component {
 
     state = {
-        showSideDrawer: true
+        showSideDrawer: false
     }
     sideDrawerToggleHandler = () => {
         this.setState( prevState => {
