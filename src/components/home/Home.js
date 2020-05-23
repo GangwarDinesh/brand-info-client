@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import styles from './home.module.css';
 import BrandSearch from '../brandSearch/BrandSearch';
-import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import ProductDetails from '../productDetails/ProductDetails';
 import BrandFilter from '../brandFilter/BrandFilter';
