@@ -1,0 +1,39 @@
+.PojoConverter {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+    margin-top: 10%;
+    margin-bottom: 5%;
+}
+
+@media (max-width: 500px){
+    .PojoConverter {
+        margin-top: 22%;
+    }
+}
+
+.Button {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin-bottom: 10%;
+    margin: 5px 0;
+    padding: 11px;
+    font: inherit;
+    border: 1px solid #fa923f;
+    color: #fa923f;
+    cursor: pointer;
+    border-radius: 5px 5px 5px 5px;
+    width: auto;
+}
+
+.ButtonSection {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+    margin-bottom: 5%;
+}

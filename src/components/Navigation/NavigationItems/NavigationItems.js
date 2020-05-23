@@ -3,10 +3,12 @@ import styles from './navigationItems.module.css';
 import NavigationItem from './NavigationItem/NavigationItem';
 
 const navigationItems = (props) => (
-    <ul className={styles.NavigationItems}>
-        <NavigationItem link="/" active>Brand Finder</NavigationItem>
-        <NavigationItem link="/" >Pojo Converter</NavigationItem>
-    </ul>
+    <nav>
+        <ul className={styles.NavigationItems}>
+            <NavigationItem link="/" active>Home</NavigationItem>
+            <NavigationItem link="/pojo-converter">Pojo Converter</NavigationItem>
+        </ul>
+    </nav>
 );
 
 export default navigationItems;
