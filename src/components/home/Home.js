@@ -6,6 +6,8 @@ import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import ProductDetails from '../productDetails/ProductDetails';
 import BrandFilter from '../brandFilter/BrandFilter';
+import Toolbar from '../Navigation/Toolbar/Toolbar';
+import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 
 
 class Home extends Component {
@@ -16,7 +18,8 @@ class Home extends Component {
         filteredProducts : [],
         error : false,
         countries : [],
-        defaultMessage : "Blank"
+        defaultMessage : "Blank",
+        showSideDrawer: true
     }
     productSeachHandler = () => {
         const val = this.state.inputText;
@@ -57,6 +60,18 @@ class Home extends Component {
         }
     }
 
+    sideDrawerToggleHandler = () => {
+        this.setState( prevState => {
+            return {showSideDrawer: !prevState.showSideDrawer};
+        });
+    }
+
+    sideDrawerClosedHandler = () =>{
+        this.setState({
+            showSideDrawer: false
+        });
+    }
+
     render () {
         let products = "";
         let options = "";
@@ -73,11 +88,16 @@ class Home extends Component {
                 return <option key={key} value={key}>{key}</option>;
             });
         }
+
         return (
             <div>
                 <section className={styles.BrandInfo}>
-                    <Header/>
+                    <Toolbar drawerToggleClicked = {this.sideDrawerToggleHandler} />
+                    <SideDrawer 
+                        open={this.state.showSideDrawer} 
+                        closed={this.sideDrawerClosedHandler}/>
                 </section>
+                
                 <section>
                     <BrandSearch 
                             inputText={this.state.inputText} 
