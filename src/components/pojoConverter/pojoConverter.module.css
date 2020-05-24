@@ -5,7 +5,15 @@
     width: 100%;
     margin: auto;
     margin-top: 10%;
-    margin-bottom: 5%;
+}
+.PojoConverter textarea {
+    border:1px solid green;
+    box-shadow: 0 0 10px #719ECE;
+}
+.PojoConverter textarea:focus{
+    outline: none !important;
+    border:1px solid red;
+    box-shadow: 0 0 10px #719ECE;
 }
 
 @media (max-width: 500px){
@@ -36,4 +44,18 @@
     width: 100%;
     margin: auto;
     margin-bottom: 5%;
+}
+
+.ErrorSection {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+}
+
+.ErrorSection p{
+    font-size: 18px;
+    font-style: italic;
+    color: red;
 }

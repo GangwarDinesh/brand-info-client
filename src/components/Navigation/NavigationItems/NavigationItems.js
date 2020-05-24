@@ -6,7 +6,7 @@ const navigationItems = (props) => (
     <nav>
         <ul className={styles.NavigationItems}>
             <NavigationItem link="/" active>Home</NavigationItem>
-            <NavigationItem link="/pojo-converter">Pojo Converter</NavigationItem>
+            <NavigationItem link="/pojo-converter">Pojo Converter(For Developers)</NavigationItem>
         </ul>
     </nav>
 );
