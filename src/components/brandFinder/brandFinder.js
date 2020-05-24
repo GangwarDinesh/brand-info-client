@@ -29,27 +29,30 @@ class BrandFinder extends Component {
         }
        
         axios.post("/search", requestMap)
-                .then( response => {
-                    
-                    let countriesSet = new Set();
+                .then( response => {  
+                    let countriesSet = null;
                     if(this.state.inputText){//This condition for specific search
+                        countriesSet = new Set();
                         this.setState({
                             filteredProducts : response.data.response,
-                            products : response.data.response
+                            products : response.data.response,
+                            isLoading: false
                         });
-                        this.state.products.map(obj=>{
+                        response.data.response.map(obj=>{
                             countriesSet.add(obj.country);
                             return true;
                         });
 
+                        this.setState({countries : countriesSet});
+
                         if(response.data.response.length===0){
                             this.setState({
                                 defaultMessage : "Brand infromation not found...",
-                                pageNo: 0,
-                                isLoading: false
+                                pageNo: 0
                             });
                         }
                     }else{
+                        countriesSet = new Set();
                         if(this.state.isLoading){
                             this.setState({
                                 filteredProducts : this.state.filteredProducts.concat(response.data.response),
