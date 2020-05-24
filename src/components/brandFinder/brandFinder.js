@@ -5,6 +5,7 @@ import ProductDetails from '../productDetails/ProductDetails';
 import BrandFilter from '../brandFilter/BrandFilter';
 import Auxiliary from '../../hoc/Auxiliary';
 import styles from './brandFinder.module.css';
+import InfiniteScroll from "react-infinite-scroll-component";
 
 class BrandFinder extends Component {
 
@@ -15,32 +16,64 @@ class BrandFinder extends Component {
         error : false,
         countries : [],
         defaultMessage : "Blank",
-        showSideDrawer: true
+        showSideDrawer: true,
+        pageNo : 0,
+        isLoading : false
     }
     productSeachHandler = () => {
         const val = this.state.inputText;
-        axios.get("/search?inputText=" + val)
+        const requestMap = {
+            PAGE_SIZE: 10,
+            PAGE_NO: this.state.pageNo,
+            INPUT_TEXT: val
+        }
+       
+        axios.post("/search", requestMap)
                 .then( response => {
                     let countriesSet = new Set();
-                    response.data.response.map(obj=>{
+                    if(this.state.isLoading){
+                        this.setState({
+                            filteredProducts : this.state.filteredProducts.concat(response.data.response),
+                            products : this.state.products.concat(response.data.response)
+                        });
+                    }else{
+                        this.setState({
+                            filteredProducts : response.data.response,
+                            products : response.data.response
+                        });
+                    }
+
+                    this.state.products.map(obj=>{
                         countriesSet.add(obj.country);
                         return true;
                     });
-                    this.setState({
-                        filteredProducts : response.data.response,
-                        products : response.data.response,
-                        countries : countriesSet
-                    });
    
                     if(response.data.response.length===0){
-                        this.setState({defaultMessage : "Brand infromation not found..."});
+                        if(this.state.pageNo===0){
+                            this.setState({
+                                defaultMessage : "Brand infromation not found..."});
+                        }
+                        this.setState({
+                            pageNo: 0,
+                            isLoading: false
+                        });
                     }else{
-                        this.setState({defaultMessage : null});
+                        const pageNo = this.state.pageNo + 1;
+                        this.setState({
+                            defaultMessage : null,
+                            pageNo : pageNo,
+                            isLoading : true,
+                            countries : countriesSet
+                        });
                     }
                 })
                 .catch( err => {
                     console.log(err);
-                    this.setState({error: true, defaultMessage: "Something went wrong!"});
+                    this.setState({
+                        error: true, 
+                        defaultMessage: "Something went wrong!",
+                        isLoading : false
+                    });
                 });
     }
     handleChangeValue = (e) => {
@@ -103,10 +136,19 @@ class BrandFinder extends Component {
                                 message = {this.state.defaultMessage} />
                         </section>):""
                 }
-                <section className={styles.BrandFinder}>
-                    {products}
-                </section>
                 
+                <InfiniteScroll
+                    dataLength = {this.state.products.length}
+                    next = {this.productSeachHandler}
+                    hasMore = {true}
+                    loader = {
+                        this.state.isLoading ? 
+                            <h4 style={{textAlign: "center"}}>Loading...</h4> : ""
+                        }>
+                        <section className={styles.BrandFinder}>
+                            {products}
+                        </section>
+                </InfiniteScroll>
             </Auxiliary>
         );
     }
