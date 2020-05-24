@@ -30,42 +30,63 @@ class BrandFinder extends Component {
        
         axios.post("/search", requestMap)
                 .then( response => {
+                    
                     let countriesSet = new Set();
-                    if(this.state.isLoading){
-                        this.setState({
-                            filteredProducts : this.state.filteredProducts.concat(response.data.response),
-                            products : this.state.products.concat(response.data.response)
-                        });
-                    }else{
+                    if(this.state.inputText){//This condition for specific search
                         this.setState({
                             filteredProducts : response.data.response,
                             products : response.data.response
                         });
+                        this.state.products.map(obj=>{
+                            countriesSet.add(obj.country);
+                            return true;
+                        });
+
+                        if(response.data.response.length===0){
+                            this.setState({
+                                defaultMessage : "Brand infromation not found...",
+                                pageNo: 0,
+                                isLoading: false
+                            });
+                        }
+                    }else{
+                        if(this.state.isLoading){
+                            this.setState({
+                                filteredProducts : this.state.filteredProducts.concat(response.data.response),
+                                products : this.state.products.concat(response.data.response)
+                            });
+                        }else{
+                            this.setState({
+                                filteredProducts : response.data.response,
+                                products : response.data.response
+                            });
+                        }
+                       
+                        this.state.products.map(obj=>{
+                            countriesSet.add(obj.country);
+                            return true;
+                        });
+
+                        if(response.data.response.length===0){
+                            if(this.state.pageNo===0){
+                                this.setState({
+                                    defaultMessage : "Brand infromation not found..."});
+                            }
+                            this.setState({
+                                pageNo: 0,
+                                isLoading: false
+                            });
+                        }else{
+                            const pageNo = this.state.pageNo + 1;
+                            this.setState({
+                                defaultMessage : null,
+                                pageNo : pageNo,
+                                isLoading : true,
+                                countries : countriesSet
+                            });
+                        }
                     }
 
-                    this.state.products.map(obj=>{
-                        countriesSet.add(obj.country);
-                        return true;
-                    });
-   
-                    if(response.data.response.length===0){
-                        if(this.state.pageNo===0){
-                            this.setState({
-                                defaultMessage : "Brand infromation not found..."});
-                        }
-                        this.setState({
-                            pageNo: 0,
-                            isLoading: false
-                        });
-                    }else{
-                        const pageNo = this.state.pageNo + 1;
-                        this.setState({
-                            defaultMessage : null,
-                            pageNo : pageNo,
-                            isLoading : true,
-                            countries : countriesSet
-                        });
-                    }
                 })
                 .catch( err => {
                     console.log(err);
