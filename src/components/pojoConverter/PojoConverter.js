@@ -19,6 +19,7 @@ class PojoConverter extends Component{
         if(null !== inputVal){
             try {
                 const parsedJson = JSON.parse(inputVal);
+                this.setState({errorMessage: null});
                 axios.post("/pojo/generate", parsedJson, {
                         responseType: 'arraybuffer',
                         headers: {
@@ -33,7 +34,8 @@ class PojoConverter extends Component{
                         document.body.appendChild(link);
                         link.click();
                     }).catch(error => {
-                        console.log(error)
+                        console.log(error);
+                        this.setState({errorMessage: 'Error occurred while processing your request.'});
                     })
             } catch (error) {
                 console.log('Please enter a valid JSON');
