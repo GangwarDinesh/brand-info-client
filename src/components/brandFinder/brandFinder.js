@@ -125,7 +125,9 @@ class BrandFinder extends Component {
             showSideDrawer: false
         });
     }
-
+    componentDidMount = () =>{
+        this.productSeachHandler();
+    }
     render () {
         let products = "";
         let options = "";

@@ -4,7 +4,7 @@ import Footer from '../footer/Footer';
 import Toolbar from '../Navigation/Toolbar/Toolbar';
 import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 import { Route } from 'react-router-dom';
-import BrandFinder from '../brandFinder/brandFinder';
+import BrandFinder from '../brandFinder/BrandFinder';
 import PojoConverter from '../pojoConverter/PojoConverter';
 
 class Home extends Component {
